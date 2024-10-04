@@ -3,20 +3,39 @@
 
 /**
 1.可解释聚类
+1.1中
+interpretable clustering using unsupervised binary trees
+https://arxiv.org/pdf/1103.5339
+Xclusters:explainability first clustering
+https://ojs.aaai.org/index.php/AAAI/article/download/25963/25735
+optimal interpretable clustering using oblique decision trees
+https://dl.acm.org/doi/pdf/10.1145/3534678.3539361
+interpretable clustering via multi-polytope machines
+https://ojs.aaai.org/index.php/AAAI/article/view/20693/20452
+Pc-x:profound clustering via slow exemplars
+https://proceedings.mlr.press/v234/pan24a/pan24a.pdf
 an exemplars-based approach for explainable clustering: complexity and efficient approximation algorithms
 通过示例进行解释的聚类算法，结合聚类质量和解释质量为1个参数便于操作，开发嵌入生成代表性实例最小化聚类直径的多项式时间近似算法
+https://epubs.siam.org/doi/pdf/10.1137/1.9781611978032.6
 interpretable clustering: an optimization approach
 基于混合整数优化(MIO)的无监督学习问题公式，开发ICOT算法实现全局最优聚类树
 加权距离度量方法 -> 有效处理混合数值和分类数据 -> 防止单一变量类型主导距离计算
 无需考虑调节树的复杂度计算，损失函数考虑了类内密度和类间分隔
+https://link.springer.com/content/pdf/10.1007/s10994-020-05896-2.pdf
+1.2后
 explainable k-means and k-medians clustering
 迭代错误最小化算法(IMM):使用小型决策树划分数据集 -> 每个族的分配用少量特征解释
 构建带有k个阈值树来近似k-均值或k-中值聚类，通过动态规划有效寻找分割点，最小化每个节点的错误数
+https://proceedings.mlr.press/v119/moshkovitz20a/moshkovitz20a.pdf
+shallow decision trees for explainable k-means clustering
+https://www.sciencedirect.com/science/article/am/pii/S003132032200718X
+cluster explaination via polyhedral descriptions
+http://proceedings.mlr.press/v202/lawless23a/lawless23a.pdf
 explaination of clustering result based on multi-objective optimization
 多目标优化的超立方体叠加模型(HcubeOM) -> 通过优化叠加方案生成聚类结果(可解释性)
 1个目标函数是确定超立方体的最佳数量，另一个目标函数是优化超立方体的紧凑性和重叠最小化
 设计1种简洁性指标 -> 验证每个聚类生成的解释性能
-
+https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0292960&type=printable
  2.小波变换
 wavelet convolutions for large receptive fields
 waveDH(wavelet sub-bands guided convnet for efficient image dehazing)
@@ -33,6 +52,7 @@ arxiv.org/pdf/2409.17146
 molmo.allenai.org
 llama.meta.com
 huggingface.co/meta-llama
+arxiv.org/pdf/2410.01201
 
 4.物理信息机器学习(physics-informed machine learning(piml))
 https://www.osti.gov/pages/servlets/purl/2282016  science正刊
