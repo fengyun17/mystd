@@ -14,4 +14,5 @@ add_executable(ebstd main.cpp
         include/offline/btree.h
         include/offline/heap.h
         include/offline/deque.h
-        include/inline/fibheap.h)
+        include/inline/fibheap.h
+        include/offline/trie.h)
