@@ -88,7 +88,7 @@ constexpr bool is_type_in_list(){
 
 template<class T, class A=allocator<T>> class vector{
     template<class K> friend std::ostream& operator<<(std::ostream &out, vector<K> const &o);
-    template<class V> friend void swap(vector<V> &l, vector<V> &r);
+    template<class V> friend void swap(vector<V> &l, vector<V> &r) noexcept;
 
 protected:
     size_t size{};
@@ -335,22 +335,22 @@ public:
         explicit iterator(vector<T, A> *v=nullptr, T *t=nullptr) : pt(t), pv(v){}
 
         void operator++(){
-            if (pv == nullptr) throw "无效";
+            if (pv == nullptr) throw std::runtime_error("无效");
             ++pt;
         }
 
         T &operator*(){
-            if (pv == nullptr) throw "无效";
+            if (pv == nullptr) throw std::runtime_error("无效");
             return *pt;
         }
 
         const T &operator*() const{
-            if (pv == nullptr) throw "无效";
+            if (pv == nullptr) throw std::runtime_error("无效");
             return *pt;
         }
 
         bool operator!=(const iterator &it) const{
-            if (pv==nullptr || pv!=it.pv) throw "无效";
+            if (pv==nullptr || pv!=it.pv) throw std::runtime_error("无效");
             return pt != it.pt;
         }
     };
@@ -372,7 +372,7 @@ template<class T> std::ostream& operator<<(std::ostream &out, vector<T> &o){
     return out;
 }
 
-template<class T> void swap(vector<T> &l, vector<T> &r){
+template<class T> void swap(vector<T> &l, vector<T> &r) noexcept{
     using std::swap;
     swap(l.data, r.data);
     swap(l.cap, r.cap);
