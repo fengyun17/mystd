@@ -1,8 +1,14 @@
 #include <iostream>
 #include <map>
 
+struct desc {
+    std::string title;
+    std::vector<std::string> examples;
+    std::string url;
+};
+
 struct word {
-    std::map<std::string, std::map<std::string, std::map<char16_t[], std::string>>> data;
+    std::map<std::string, std::map<std::string, std::map<char16_t[], desc>>> data;
 };
 
 int main() {
