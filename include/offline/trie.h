@@ -5,6 +5,7 @@
 #ifndef TRIE_H
 #define TRIE_H
 #include <string>
+#include <vector>
 #include <__fwd/string.h>
 
 namespace ebstd {
@@ -49,14 +50,14 @@ struct node {
         return e[cur];
     }
 
-    [[nodiscard]] int search(const std::string &pre) const {
+    [[nodiscard]] std::pair<int, int> search(const std::string &pre) const {
         int cur = 1;
         for (int i = 0, path; i < pre.size(); ++i) {
             path = pre[i] - 'a';
-            if (tree[cur][path] == 0) return 0;
+            if (tree[cur][path] == 0) return {};
             cur = tree[cur][path];
         }
-        return p[cur];
+        return {p[cur], cur};
     }
 
     void del(const std::string &word) {
@@ -71,6 +72,30 @@ struct node {
                 cur = tree[cur][path];
             }
             e[cur].clear();
+        }
+    }
+};
+
+struct trie {
+    std::vector<std::string> res;
+    node *cur;
+
+    void dfs(const int idx) {
+        for (int i = 0; i < 26; ++i) {
+            if (cur->tree[idx][i] != 0) {
+                dfs(cur->tree[idx][i]);
+                res.emplace_back(*cur->e);
+            }
+        }
+    }
+
+    void recommend(const char *str) {
+        if (*str == 0) return;
+        if (cur->search(std::string{str}).first) {
+            int path = str[strlen(str)-1] - 'a';
+            dfs(cur->tree[cur->search(std::string{str}).second][path]);
+        } else {
+            res.emplace_back(cur->find(std::string{str}));
         }
     }
 };
