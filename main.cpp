@@ -12,7 +12,7 @@ struct word {
 };
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << "Hello, World! yes" << std::endl;
     const char *s = "test";
     std::cout << std::string{s} << std::endl;
     std::string str = "hello";
