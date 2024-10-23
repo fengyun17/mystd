@@ -1,5 +1,7 @@
 #include <iostream>
 #include <map>
+#include <unordered_set>
+#include <unordered_map>
 
 struct desc {
     std::string title;
@@ -17,6 +19,7 @@ template <typename T> struct node{
     node<T> *skip;
     T data;
     std::deque<node<T>*> chs;
+
     explicit node(T&& d=nullptr){
         data = std::move(d);
         leaf = false;
@@ -25,14 +28,32 @@ template <typename T> struct node{
     }
 };
 
+template <typename T, typename U> struct edge;
+
+template <typename T, typename U> struct vertex : public node<T>{
+    int id;
+    int in;
+    int out;
+    std::deque<edge<T, U>*> adj;
+    explicit vertex(int i) : id(i), in(0), out(0){}
+};
+
+template <typename T, typename U> struct edge{
+    U data;
+    vertex<T, U> *f;
+    vertex<T, U> *t;
+    edge(U&& d, vertex<T, U> *from, vertex<T, U> *to) : f(from), t(to){
+        data = std::move(d);
+    }
+};
+
 template <typename T> class ToT{
-protected:
+public:
     int cnt;
     bool (*eq)(T, T);
     bool (*com)(T, T);
     node<T> *root;
     node<T> *hot;
-public:
     ToT(bool (*e)(T, T), bool (*c)(T, T)) : cnt(0), hot(nullptr) {
         eq = e;
         com = c;
@@ -43,6 +64,12 @@ public:
     }
     [[nodiscard]] int size() const {return cnt;}
     [[nodiscard]] bool empty() const {return !root ? false : true;}
+};
+
+template <typename T, typename U> class graph{
+public:
+    std::unordered_map<int, vertex<T, U>*> ns;
+    std::unordered_set<edge<T, U>*> es;
 };
 
 int main() {
